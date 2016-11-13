@@ -54,7 +54,7 @@ def handle_packet(pkt):
 				print('\033[95m' + 'Device MAC: {pkt.addr2} '
 					'with SSID: {pkt.info}'.format(pkt=pkt) + '\033[0m') #Print to command line with green color
 				lastnotify = ''
-				if lastnotify != curmac:  #  So that notifications don't repeat
+				if lastnotify != curmac and notifications == True:  #  So that notifications don't repeat
 					themessage = 'Unknown device with MAC %s sighted!' % curmac
 					notify(themessage, "", "")    # Notify via Pushover
 					lastnotify = curmac
