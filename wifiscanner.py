@@ -46,11 +46,11 @@ def handle_packet(pkt):
 		#SEEN_DEVICES.add(curmac) #Add to set of known devices (sets ignore duplicates so it is not a problem)
 		if curmac not in IGNORE_LIST: #If not registered as ignored
 			if curmac in d:
-				logging.info('\033[95m' + 'Probe Recorded from ' + '\033[93m' + d[curmac] + '\033[95m' + ' with MAC ' + curmac + '\033[0m') #Log to file wifiscanner.log with purple color
+				logging.info('Probe Recorded from ' + d[curmac + ' with MAC ' + curmac) #Log to file wifiscanner.log
                                 print('\033[95m' + 'Probe MAC Address: ' + pkt.addr2 + ' from device ' + '\033[93m' + d[curmac] + '\033[0m')
                                         #'with SSID: {pkt.info}'.format(pkt=pkt)) #Print to command line with purple color
 			else:
-				logging.info('\033[92m' + 'Probe Recorded from MAC ' + pkt.addr2 + '\033[0m') #Log to file wifiscanner.log with green color
+				logging.info('Probe Recorded from MAC ' + pkt.addr2) #Log to file wifiscanner.log
 				print('\033[95m' + 'Device MAC: {pkt.addr2} '
 					'with SSID: {pkt.info}'.format(pkt=pkt) + '\033[0m') #Print to command line with green color
 				lastnotify = ''
@@ -64,7 +64,7 @@ def handle_packet(pkt):
 def main():
 	
 	logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',filename='wifiscanner.log',level=logging.DEBUG) #setup logging to file
-	logging.info('\n' + '\033[93m' + 'Wifi Scanner Initialized' + '\033[0m' + '\n') #announce that it has started to log file with yellow color
+	logging.info('\n'+'Wifi Scanner Initialized'+ '\n') #announce that it has started to log file with yellow color
 	print('\n' + '\033[93m' + 'Wifi Scanner Initialized' + '\033[0m' + '\n') #announce that it has started to command line with yellow color		(/n is newline)
 	
 	import argparse
