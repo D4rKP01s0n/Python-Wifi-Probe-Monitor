@@ -26,6 +26,7 @@ The program will then output all recoreded probe requested to the console, as we
 
 * Add notification support for unknown devices via a Telegram Bot, SMS (via carrier email gateway), email, and Pushover
 * Add ability to record signal strength (to relativly determine distance)
+* Add ability to imprecisely determine whether a device is idle (based on gathered probe timestamps)
 
 # Similar Projects
 
