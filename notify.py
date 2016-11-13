@@ -5,7 +5,9 @@
 #pushover_user_key = ''
 #import httplib, urllib
 ######################  Telegram Bot  ######################
-
+#    This requires the installation of "telepot" via "pip install telepot"
+#import telepot
+#t_botkey = '' #     This is the token/key of your bot, which can be obtained by messaging @BotFather
 ######################  Code  ######################
 def notify(type, importance, message):
     if pushover_app_token and pushover_user_key:
@@ -17,3 +19,6 @@ def notify(type, importance, message):
               "message": message,
           }), { "Content-type": "application/x-www-form-urlencoded" })
         return c.getresponse()
+    #if t_botkey:
+        #t_bot = telepot.Bot(t_botkey)
+        
