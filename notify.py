@@ -9,7 +9,7 @@
 #import telepot
 #t_botkey = '' #     This is the token/key of your bot, which can be obtained by messaging @BotFather
 ######################  Code  ######################
-def notify(type, importance, message):
+def notify(message, importance, thetype):
     if pushover_app_token and pushover_user_key:
         c = httplib.HTTPSConnection("api.pushover.net:443")
         c.request("POST", "/1/messages.json",
