@@ -53,11 +53,16 @@ def handle_packet(pkt):
 				logging.info('Probe Recorded from MAC ' + pkt.addr2) #Log to file wifiscanner.log
 				print('\033[95m' + 'Device MAC: {pkt.addr2} '
 					'with SSID: {pkt.info}'.format(pkt=pkt) + '\033[0m') #Print to command line with green color
-				lastnotify = ''
-				if lastnotify != curmac and notifications == True:  #  So that notifications don't repeat
-					themessage = 'Unknown device with MAC %s sighted!' % curmac
-					notify(themessage, "", "")    # Notify via Pushover
-					lastnotify = curmac
+				if 'lastnotify' in globals():  #  So that notifications don't repeat
+                                        if lastnotify !=  curmac and notifications == True:
+                                                #print "Alerting, Lastnotify is " + lastnotify # debug
+                                                #print "Alerting, Curmac is " + curmac
+                                                themessage = 'Unknown device with MAC %s sighted!' % curmac                                                                                                                           notify(themessage, "", "")    # Notify via Pushover                                                                                                                                   lastnotify = curmac
+                                elif notifications == True:
+                                        #print "Lastnotify does not exist, creating it" #debug                                                                                                                                 global lastnotify
+                                        lastnotify = curmac
+                                        themessage = 'Unknown device with MAC %s sighted!' % curmac
+                                        notify(themessage, "", "")    # Notify via Pushover
 			#print SEEN_DEVICES #Just for debug, prints all known devices
 			#dump()
 
