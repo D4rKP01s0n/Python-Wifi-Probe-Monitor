@@ -65,8 +65,6 @@ def main():
 	parser.add_argument('--interface', '-i', default='mon0', # Change mon0 to your monitor-mode enabled wifi interface
 				help='monitor mode enabled interface')
 	args = parser.parse_args()
-	sniff(iface=args.interface, prn=handle_packet) #start sniffin
-	while 1:
-		time.sleep(1) # Supposed to make an infinite loop, but for some reason it stops after a while
+	sniff(iface=args.interface, prn=handle_packet, store=0, count=0) #start sniffin, store=0 makes sniff not save captured packets and count=0 makes sniff continously scan packets
 if __name__ == '__main__':
 	main()
