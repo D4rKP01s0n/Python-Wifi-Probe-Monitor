@@ -14,7 +14,7 @@ import logging
 import time
 #Devices which are known to be constantly probing
 IGNORE_LIST = set(['00:00:00:00:00:00', '01:01:01:01:01:01'])
-SEEN_DEVICES = set() #Devices which have had their probes recieved
+#SEEN_DEVICES = set() #Devices which have had their probes recieved, removed due to memory use
 d = {'00:00:00:00:00:00':'Example MAC Address'} #Dictionary of all named devices
 
 
@@ -41,7 +41,7 @@ def handle_packet(pkt):
 		#logging.debug('Probe Recorded with MAC ' + curmac)
 		curmac = pkt.addr2
 		curmac = curmac.upper() #Assign variable to packet mac and make it uppercase
-		SEEN_DEVICES.add(curmac) #Add to set of known devices (sets ignore duplicates so it is not a problem)
+		#SEEN_DEVICES.add(curmac) #Add to set of known devices (sets ignore duplicates so it is not a problem)
 		if curmac not in IGNORE_LIST: #If not registered as ignored
 			if curmac in d:
 				logging.info('\033[95m' + 'Probe Recorded from ' + '\033[93m' + d[curmac] + '\033[95m' + ' with MAC ' + curmac + '\033[0m') #Log to file wifiscanner.log with purple color
