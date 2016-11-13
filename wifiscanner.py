@@ -10,7 +10,7 @@ from scapy.all import sniff, Dot11
 #import numpy
 import logging
 import time
-import notify.py
+from notify import *
 #Devices which are known to be constantly probing
 IGNORE_LIST = set(['00:00:00:00:00:00', '01:01:01:01:01:01'])
 #SEEN_DEVICES = set() #Devices which have had their probes recieved, removed due to memory use
@@ -37,7 +37,7 @@ notifications = False #     Change to True and set up in notify.py if you want P
 #    UNDERLINE = '\033[4m'
 
 def handle_packet(pkt):
-  if not pkt.haslayer(Dot11):
+	if not pkt.haslayer(Dot11):
 		return
 	if pkt.type == 0 and pkt.subtype == 4: #subtype used to be 8 (APs) but is now 4 (Probe Requests)
 		#logging.debug('Probe Recorded with MAC ' + curmac)
@@ -53,8 +53,10 @@ def handle_packet(pkt):
 				logging.info('\033[92m' + 'Probe Recorded from MAC ' + pkt.addr2 + '\033[0m') #Log to file wifiscanner.log with green color
 				print('\033[95m' + 'Device MAC: {pkt.addr2} '
 					'with SSID: {pkt.info}'.format(pkt=pkt) + '\033[0m') #Print to command line with green color
-				if lastnotify != curmac  #  So that notifications don't repeat
-					notify("Unknown device with MAC %s sighted!") % curmac    # Notify via Pushover
+				lastnotify = ''
+				if lastnotify != curmac:  #  So that notifications don't repeat
+					themessage = 'Unknown device with MAC %s sighted!' % curmac
+					notify(themessage, "", "")    # Notify via Pushover
 					lastnotify = curmac
 			#print SEEN_DEVICES #Just for debug, prints all known devices
 			#dump()
