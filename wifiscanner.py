@@ -2,8 +2,6 @@
 #     Wifiscanner.py - A simple python script which records and logs wifi probe requests.
 #     Author - D4rKP01s0n
 #     Requirements - Scapy and Datetime
-#     Inspiration - Tim Tomes (LaNMaSteR53)'s WUDS https://bitbucket.org/LaNMaSteR53/wuds/
-#     Reminder - Change mon0 (around line 65) to your monitor-mode enabled wifi interface
 #########################################################################
 
 
@@ -16,6 +14,9 @@ import time
 IGNORE_LIST = set(['00:00:00:00:00:00', '01:01:01:01:01:01'])
 #SEEN_DEVICES = set() #Devices which have had their probes recieved, removed due to memory use
 d = {'00:00:00:00:00:00':'Example MAC Address'} #Dictionary of all named devices
+
+
+wificard = 'mon0' #    Change this to your monitor-mode enabled wifi interface
 
 
 #knownfile = open('knowndevices.txt', 'a')
@@ -62,7 +63,7 @@ def main():
 	
 	import argparse
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--interface', '-i', default='mon0', # Change mon0 to your monitor-mode enabled wifi interface
+	parser.add_argument('--interface', '-i', default=wificard, # Change mon0 to your monitor-mode enabled wifi interface
 				help='monitor mode enabled interface')
 	args = parser.parse_args()
 	sniff(iface=args.interface, prn=handle_packet, store=0, count=0) #start sniffin, store=0 makes sniff not save captured packets and count=0 makes sniff continously scan packets
